@@ -1,10 +1,11 @@
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
+import Fonts from "../fonts/Fonts";
 
 export default function MyTripsScreen() {
-  return (
-    <View style={styles.container}>
-      <Text variant="headlineMedium">MyTrips!</Text>
+    return (
+      <View style={styles.container}>
+      <Text variant="headlineMedium" style={{fontFamily : Fonts.urbanist_700}}>My Trips!</Text>
     </View>
   );
 }

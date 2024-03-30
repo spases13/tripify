@@ -12,10 +12,25 @@ import IconLocationSolid from "./assets/icons/solid/IconLocationSolid";
 import IconLocationOutlined from "./assets/icons/outlined/IconLocationOutlined";
 import IconHeartSolid from "./assets/icons/solid/IconHeartSolid";
 import IconHeartOutlined from "./assets/icons/outlined/IconHeartOutlined";
+import { View } from "react-native";
+import { Urbanist_400Regular, Urbanist_500Medium , Urbanist_600SemiBold , Urbanist_700Bold , Urbanist_800ExtraBold, useFonts } from '@expo-google-fonts/urbanist';
+import Colors from "./colors/Colors";
+import Fonts from "./fonts/Fonts";
 
 export default function App() {
   const Tab = createBottomTabNavigator();
 
+  let [fontsLoaded] = useFonts({
+    Urbanist_400Regular,
+    Urbanist_500Medium ,
+    Urbanist_600SemiBold ,
+    Urbanist_700Bold,
+    Urbanist_800ExtraBold
+  });
+
+  if (!fontsLoaded) {
+    return <View></View>;
+  } else {
   return (
     <NavigationContainer >
       <Tab.Navigator
@@ -29,7 +44,7 @@ export default function App() {
             else if (route.name === "Saved") {
               icon = focused ? <IconHeartSolid fill = {color} /> : <IconHeartOutlined fill = {color} />;
             }
-            else if (route.name === "MyTrips") {
+            else if (route.name === "My Trips") {
               icon = focused ? <IconLocationSolid fill = {color} /> : <IconLocationOutlined fill = {color} />;
             }
             else if (route.name === "Settings") {
@@ -38,19 +53,20 @@ export default function App() {
             return icon;
           },
           tabBarLabelStyle: {
-            fontSize: 9,
-            fontWeight : "700"
+            fontSize: 10,
+            fontFamily : Fonts.urbanist_700
           },
-          tabBarStyle : {height  : 56 , paddingBottom : 10 , elevation : 0 , backgroundColor : "#fff" , borderColor  : "#fff"},
-          tabBarActiveTintColor: "#2EB878",
-          tabBarInactiveTintColor: "#aaa",
+          tabBarStyle : {height  : 56 , paddingBottom : 10 , elevation : 0 , backgroundColor : Colors.white , borderColor  : Colors.white},
+          tabBarActiveTintColor: Colors.primary,
+          tabBarInactiveTintColor: Colors.gray,
         })}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="MyTrips" component={MyTripsScreen} />
+        <Tab.Screen name="My Trips" component={MyTripsScreen} />
         <Tab.Screen name="Saved" component={SavedScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
+}
 }
