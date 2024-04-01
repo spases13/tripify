@@ -12,11 +12,11 @@ import { MaterialIcons } from "@expo/vector-icons";
 const CardsScroller = () => {
 
   const apiCountries = "https://restcountries.com/v3.1/all"
-
+  
   const [countriesData, setCountriesData] = useState<any>([]);
 
   useEffect(() => {
-    if (!countriesData) {
+    if (countriesData.length === 0) {
       axios.get(apiCountries).then((response) => {
         setCountriesData(response.data)
         // console.log(response.data);
