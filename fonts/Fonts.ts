@@ -1,4 +1,4 @@
-const Fonts = { 
+const Fonts = {
   urbanist_400 : "Urbanist_400Regular",
   urbanist_500 : "Urbanist_500Medium",
   urbanist_600 : "Urbanist_600SemiBold",

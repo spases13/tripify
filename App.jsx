@@ -32,7 +32,7 @@ export default function App() {
     return <View></View>;
   } else {
   return (
-    <NavigationContainer >
+    <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
           headerShown : false,

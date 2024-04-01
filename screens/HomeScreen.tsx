@@ -1,19 +1,30 @@
-import { StyleSheet, View } from "react-native";
-import { Text } from "react-native-paper";
+import { ScrollView, StyleSheet, View } from "react-native";
+import Colors from "../colors/Colors";
+import Fonts from "../fonts/Fonts";
+import { SafeAreaProvider, SafeAreaView } 
+from "react-native-safe-area-context";
+import Header from "../components/Header";
+import HomeSearchBar from "../components/HomeSearchBar";
+import CardsScroller from "../components/CardsScroller";
+
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text variant="headlineMedium">Home!</Text>
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <ScrollView>
+          <Header/>
+          <HomeSearchBar/>
+          <CardsScroller/>
+        </ScrollView>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor : "#fff"
+    flex : 1,
+    backgroundColor : Colors.white
   },
 });
