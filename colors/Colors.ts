@@ -4,9 +4,11 @@ const Colors = {
   primary_alt : "#63A885",
   gray : "#aaa",
   // gray_100 : "#EFF9F5",
-  gray_100 : "whitesmoke",
+  gray_100 : "azure",
   gray_900 : "#5E5D5E",
+  gray_700 : "#aaa",
   gray_500 : "#ccc",
+  gray_300 : "#eee",
   white : "#fff",
   black : "#212121"
 }

@@ -17,6 +17,7 @@ import CustomButton from "../../library/CustomButton";
 import CustomInput from "../../library/CustomInput";
 import TravelPreferenceCard from "../../library/TravelPreferenceCard";
 import Footer from "../../library/Footer";
+import { useNavigation } from "@react-navigation/native";
 
 export default function TravelPreferencesScreen() {
   const [selectedTravelPreferences, setSelectedTravelPreferences] =
@@ -94,6 +95,8 @@ export default function TravelPreferencesScreen() {
     }
   };
 
+  const navigation : any = useNavigation()
+
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <CustomHeaderNavigation onlyTwo>
@@ -137,7 +140,7 @@ export default function TravelPreferencesScreen() {
         </ScrollView>
       </KeyboardAvoidingView>
       <Footer>
-        <CustomButton title="Continue" />
+        <CustomButton onPress = {()=> navigation.navigate("PersonalTouchScreen")} title="Continue" />
       </Footer>
     </SafeAreaView>
   );

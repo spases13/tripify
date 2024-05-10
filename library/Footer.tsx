@@ -3,9 +3,9 @@ import React from 'react'
 import GlobalStyles from '../global_styles/GlobalStyles'
 import Colors from '../colors/Colors'
 
-export default function Footer({children}) {
+export default function Footer({children , relative  = false}) {
   return (
-    <View style = {styles.footer}>
+    <View style = {[styles.footer , relative && {position : "relative"}]}>
       {children}
     </View>
   )
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     width : "100%",
     position :"absolute",
     bottom : 0,
-    left : 0
+    right : 0,
+    left : 0,
   }
 })
