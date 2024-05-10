@@ -4,7 +4,7 @@ import Fonts from "../fonts/Fonts";
 
 export default function MyTripsScreen() {
     return (
-      <View style={styles.container}>
+    <View style={styles.container}>
       <Text variant="headlineMedium" style={{fontFamily : Fonts.urbanist_700}}>My Trips!</Text>
     </View>
   );

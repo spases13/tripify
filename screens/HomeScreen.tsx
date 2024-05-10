@@ -1,12 +1,10 @@
 import { ScrollView, StyleSheet, View } from "react-native";
 import Colors from "../colors/Colors";
-import Fonts from "../fonts/Fonts";
 import { SafeAreaProvider, SafeAreaView } 
 from "react-native-safe-area-context";
 import Header from "../components/Header";
 import HomeSearchBar from "../components/HomeSearchBar";
 import CardsScroller from "../components/CardsScroller";
-
 
 export default function HomeScreen() {
   return (
@@ -15,6 +13,8 @@ export default function HomeScreen() {
         <ScrollView>
           <Header/>
           <HomeSearchBar/>
+          <CardsScroller/>
+          <CardsScroller/>
           <CardsScroller/>
         </ScrollView>
       </SafeAreaView>

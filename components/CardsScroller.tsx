@@ -2,7 +2,7 @@ import { View, StyleSheet, Image, FlatList, TouchableOpacity } from 'react-nativ
 import { Text } from 'react-native-paper'
 import React, { useEffect, useState } from 'react'
 import GlobalStyles from '../global_styles/GlobalStyles'
-import { Link } from '@react-navigation/native'
+import { Link, useNavigation } from '@react-navigation/native'
 import Fonts from '../fonts/Fonts'
 import Colors from '../colors/Colors'
 import Data from '../data/Data'
@@ -10,6 +10,8 @@ import axios from "axios"
 import { MaterialIcons } from "@expo/vector-icons";
 
 const CardsScroller = () => {
+
+  const navigation : any = useNavigation();
 
   const apiCountries = "https://restcountries.com/v3.1/all"
   
@@ -19,7 +21,6 @@ const CardsScroller = () => {
     if (countriesData.length === 0) {
       axios.get(apiCountries).then((response) => {
         setCountriesData(response.data)
-        // console.log(response.data);
       })
     }
   }, [countriesData])
@@ -34,8 +35,8 @@ const CardsScroller = () => {
   }
   
   return (
-    <View style={[styles.container, GlobalStyles.containerScroller]}>
-      <View style={styles.header}>
+    <View style={styles.container}>
+      <View style={[styles.header , {paddingHorizontal : GlobalStyles.paddingScreen}]}>
         <Text variant='titleMedium' style={styles.header_text}>Popular Destinations</Text>
         <Link to={"/"}>
           <View style={styles.header_link}>
@@ -51,9 +52,10 @@ const CardsScroller = () => {
         horizontal={true}
         keyExtractor={(item : any) => item.id}
         data={Data}
+        ItemSeparatorComponent={()=><View style= {{marginHorizontal : GlobalStyles.paddingScreen * -1/2}}></View>}
         renderItem={({ item }) =>
         (
-          <TouchableOpacity activeOpacity={0.7} style={styles.card}>
+          <TouchableOpacity onPress={()=> navigation.navigate("Signup")} activeOpacity={0.7} style={styles.card}>
             <View style={styles.cardImgContainer}>
               <Image style={styles.img} source={{ uri: item.imgSrc }} />
             </View>
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginRight: 20,
+    flexWrap : "wrap"
   },
   header_text: {
     fontFamily: Fonts.urbanist_700,
@@ -106,12 +108,9 @@ const styles = StyleSheet.create({
   },
   card: {
     width: 260,
-    marginRight: 20,
-    // backgroundColor: Colors.primary,
-    // gap: 15,
-    },
+    marginHorizontal : GlobalStyles.paddingScreen,
+  },
   cardImgContainer: {
-    // backgroundColor: "orange",
     height: 180,
     marginBottom : 15
   },
@@ -125,7 +124,6 @@ const styles = StyleSheet.create({
     flexDirection : "row",
     alignItems :"center",
     gap : 10
-    // justifyContent : "space-between"
   },
   card_second_text_title: { 
     fontFamily: Fonts.urbanist_500,

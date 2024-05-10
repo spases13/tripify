@@ -9,12 +9,12 @@ const Header = () => {
   return (
     <View style={[styles.header, GlobalStyles.container]}>
       <View style={[styles.logo_container]}>
-      <Image resizeMode="contain" style={[styles.logo]} source={{ uri: "https://tripify.ge/uploads/logo/logo_64fb980e494d10-38879216-60008141.png", }} />
+      <Image resizeMode="contain" style={[styles.logo]} source={require("../assets/logo/logo_primary.png")} />
       </View>
       <Text style={styles.text} variant="titleLarge">
         {GlobalTexts.app_name}
       </Text>
-      <Image style={[styles.logo,GlobalStyles.hidden]} source={{ uri: "https://tripify.ge/uploads/logo/logo_64fb980e494d10-38879216-60008141.png", }} />
+      <View style={styles.logo}  />
     </View>
   );
 };
