@@ -14,7 +14,7 @@ export default function CustomButton({ ...props }) {
   let buttonStyle : any;
 
   if (variant === "secondary") {
-    colors = [Colors.gray_100, Colors.gray_100];
+    colors = [Colors.gray_300, Colors.gray_300];
     titleStyle = styles.titleStyleV2;
     buttonStyle = styles.buttonStyleV2;
   } else if (variant === "social-media") {
@@ -65,13 +65,14 @@ const styles = StyleSheet.create({
     minWidth: 100,
     overflow: "hidden",
     borderWidth : 2,
-    borderColor : Colors.gray_100
+    borderColor : Colors.gray_300
   },
   buttonStyleContainer: {
     borderRadius: 100,
     overflow: "hidden",
   },
   titleStyle: {
+    includeFontPadding : false,
     fontFamily: Fonts.urbanist_700,
   },
   buttonStyleV2: {

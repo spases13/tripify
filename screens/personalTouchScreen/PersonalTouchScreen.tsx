@@ -18,6 +18,7 @@ import CustomInput from "../../library/CustomInput";
 import Footer from "../../library/Footer";
 import { Icon } from "react-native-elements";
 import * as ImagePicker from "expo-image-picker";
+import { useNavigation } from "@react-navigation/native";
 
 export default function PersonalTouchScreen() {
   const [avatarImage, setAvatarImage] = useState({
@@ -41,11 +42,13 @@ export default function PersonalTouchScreen() {
     }
   };
 
+  const navigation : any = useNavigation()
+
   return (
     <>
       <SafeAreaView style={styles.safeAreaContainer}>
         <CustomHeaderNavigation onlyTwo>
-          <ProgressionBar progressValue={0.6} />
+          <ProgressionBar progressValue={3/3} />
         </CustomHeaderNavigation>
         <ScrollView contentContainerStyle={[styles.container]}>
           <View>
@@ -74,8 +77,8 @@ export default function PersonalTouchScreen() {
               </TouchableOpacity>
             </View>
           </View>
-          <View
-            style={{ marginTop: 30, flexDirection: "column", gap: 30, flex: 1 }}
+          <ScrollView
+            contentContainerStyle={{ marginTop: 30, flexDirection: "column", gap: 30, flex: 1 }}
           >
             <CustomInput
               icon="people"
@@ -95,10 +98,10 @@ export default function PersonalTouchScreen() {
               keyboardType="phone-pad"
               placeholder="Phone Number"
             />
-          </View>
+          </ScrollView>
         </ScrollView>
         <Footer relative>
-          <CustomButton title="Continue" />
+          <CustomButton onPress = {()=> navigation.navigate("AllSetScreen")} title="Continue" />
         </Footer>
       </SafeAreaView>
     </>
@@ -123,7 +126,7 @@ const styles = StyleSheet.create({
   },
   description: {
     includeFontPadding: false,
-    fontSize: 14,
+    fontSize: 16,
     lineHeight: 24,
     fontFamily: Fonts.urbanist_500,
     color: Colors.gray_900,

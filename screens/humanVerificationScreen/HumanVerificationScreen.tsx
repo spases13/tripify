@@ -17,7 +17,7 @@ export default function HumanVerificationScreen() {
   return (
     <SafeAreaView style = {styles.safeAreaContainer}>
       <CustomHeaderNavigation onlyTwo>
-        <ProgressionBar progressValue={0.2}/>
+        <ProgressionBar progressValue={1/3}/>
       </CustomHeaderNavigation>
       <View style={styles.container}>
         <View>
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
   description: {
     includeFontPadding  : false,
-    fontSize: 14,
+    fontSize: 16,
     lineHeight: 22,
     fontFamily: Fonts.urbanist_500,
     color: Colors.gray_900,

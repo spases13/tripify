@@ -100,7 +100,7 @@ export default function TravelPreferencesScreen() {
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <CustomHeaderNavigation onlyTwo>
-        <ProgressionBar progressValue={0.4} />
+        <ProgressionBar progressValue={2/3} />
       </CustomHeaderNavigation>
       <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={styles.container}>
@@ -119,7 +119,6 @@ export default function TravelPreferencesScreen() {
               placeholder="Search travel preferences"
             />
           </View>
-
           <ScrollView contentContainerStyle={styles.travelPreferencesList}>
             {data
               .filter((item: any) =>
@@ -164,7 +163,7 @@ const styles = StyleSheet.create({
   },
   description: {
     includeFontPadding: false,
-    fontSize: 14,
+    fontSize: 16,
     lineHeight: 24,
     fontFamily: Fonts.urbanist_500,
     color: Colors.gray_900,

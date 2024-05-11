@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native'
 
 export default function TravelPreferenceCard(props : any) {
   return (
-    <TouchableOpacity onPress={props.onPress} style = {[styles.card , props.selected && styles.card_selected]}>
+    <TouchableOpacity activeOpacity={1} onPress={props.onPress} style = {[styles.card , props.selected && styles.card_selected]}>
       <Text style={[styles.card_name , props.selected && styles.card_name_selected]}>{props.name} {props.emoji}</Text>
     </TouchableOpacity>
   )

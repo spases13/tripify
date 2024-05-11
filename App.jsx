@@ -10,6 +10,7 @@ import DestinationDetails from "./screens/detinationDetails/DestinationDetails";
 import HumanVerificationScreen from "./screens/humanVerificationScreen/HumanVerificationScreen";
 import TravelPreferencesScreen from "./screens/travelPreferences/TravelPreferencesScreen";
 import PersonalTouchScreen from "./screens/personalTouchScreen/PersonalTouchScreen";
+import AllSetScreen from "./screens/allSetScreen/AllSetScreen";
 
 
 export default function App() {
@@ -37,6 +38,7 @@ export default function App() {
           <Stack.Screen options={{headerShown : false}} name="HumanVerification" component={HumanVerificationScreen}/>
           <Stack.Screen options={{headerShown : false}} name="TravelPreferencesScreen" component={TravelPreferencesScreen}/>
           <Stack.Screen options={{headerShown : false}} name="PersonalTouchScreen" component={PersonalTouchScreen}/>
+          <Stack.Screen options={{headerShown : false}} name="AllSetScreen" component={AllSetScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     );

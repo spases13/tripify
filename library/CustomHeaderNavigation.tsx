@@ -1,7 +1,5 @@
 import {
-  Dimensions,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -32,7 +30,6 @@ export default function CustomHeaderNavigation(props: any) {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor  : "orange",
     paddingRight: GlobalStyles.paddingScreen,
     justifyContent: "space-between",
     flexDirection: "row",
@@ -41,7 +38,6 @@ const styles = StyleSheet.create({
   },
   backArrowButton: {
     padding: 10,
-    // backgroundColor : "cyan",
     paddingHorizontal: GlobalStyles.paddingScreen,
   },
 });

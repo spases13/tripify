@@ -45,10 +45,11 @@ const MainScreen = () => {
           return icon;
         },
         tabBarLabelStyle: {
-          fontSize: 10,
+          fontSize: 12,
+          marginTop : -5,
           fontFamily : Fonts.urbanist_700
         },
-        tabBarStyle : {height  : 56 , paddingBottom : 10 , elevation : 0 , backgroundColor : Colors.white , borderColor  : Colors.white},
+        tabBarStyle : {height  : 66 , paddingBottom : 10 , elevation : 0 , backgroundColor : Colors.white , borderColor  : Colors.white},
         tabBarActiveTintColor: Colors.primary,
         tabBarInactiveTintColor: Colors.gray,
       })}
