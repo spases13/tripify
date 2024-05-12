@@ -1,6 +1,5 @@
-import { View, Text, StatusBar } from 'react-native'
+import { StatusBar } from 'react-native'
 import React from 'react'
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import IconHomeSolid from '../assets/icons/solid/IconHomeSolid';
 import IconHomeOutlined from '../assets/icons/outlined/IconHomeOutlined';
@@ -23,8 +22,7 @@ const MainScreen = () => {
 
   return (
     <>
-    <StatusBar backgroundColor={Colors.white} barStyle='dark-content'/> 
-    <NavigationContainer independent>
+    <StatusBar backgroundColor={Colors.white} barStyle='dark-content'/>
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown : false,
@@ -46,10 +44,9 @@ const MainScreen = () => {
         },
         tabBarLabelStyle: {
           fontSize: 12,
-          marginTop : -5,
           fontFamily : Fonts.urbanist_700
         },
-        tabBarStyle : {height  : 66 , paddingBottom : 10 , elevation : 0 , backgroundColor : Colors.white , borderColor  : Colors.white},
+        tabBarStyle : {height  : 65 , paddingTop  : 10, paddingBottom : 10 , elevation : 0 , backgroundColor : Colors.white , borderColor  : Colors.white},
         tabBarActiveTintColor: Colors.primary,
         tabBarInactiveTintColor: Colors.gray,
       })}
@@ -59,7 +56,6 @@ const MainScreen = () => {
       <Tab.Screen name="Saved" component={SavedScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
-  </NavigationContainer>
   </>
 
   )

@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import MainScreen from "./screens/MainScreen";
-import { View } from "react-native";
+import { StatusBar, View } from "react-native";
 import { Urbanist_400Regular, Urbanist_500Medium, Urbanist_600SemiBold, Urbanist_700Bold, Urbanist_800ExtraBold, useFonts } from '@expo-google-fonts/urbanist';
 import { createStackNavigator } from '@react-navigation/stack';
 import OnboardingScreen from "./screens/onboarding/OnboardingScreen";
@@ -11,6 +11,7 @@ import HumanVerificationScreen from "./screens/humanVerificationScreen/HumanVeri
 import TravelPreferencesScreen from "./screens/travelPreferences/TravelPreferencesScreen";
 import PersonalTouchScreen from "./screens/personalTouchScreen/PersonalTouchScreen";
 import AllSetScreen from "./screens/allSetScreen/AllSetScreen";
+import Colors from "./colors/Colors";
 
 
 export default function App() {
@@ -29,6 +30,8 @@ export default function App() {
     return <View></View>;
   } else {
     return (
+      <>
+      <StatusBar backgroundColor={Colors.white} barStyle='dark-content'/>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Onboarding">
           <Stack.Screen options={{headerShown : false}} name="Main" component={MainScreen} />
@@ -41,6 +44,14 @@ export default function App() {
           <Stack.Screen options={{headerShown : false}} name="AllSetScreen" component={AllSetScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
+      </>
     );
   }
 }
+
+// import React from 'react';
+// import MainNavigator from './navigation/MainNavigator';
+
+// export default function App() {
+//   return <MainNavigator />;
+// }

@@ -4,6 +4,8 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { Text } from "react-native-paper";
 import React, { useEffect, useState } from "react";
@@ -75,13 +77,15 @@ const CardsScroller = () => {
           ></View>
         )}
         renderItem={({ item }) => (
-          <TouchableOpacity
+          <TouchableHighlight
+            activeOpacity={0.6}
+            underlayColor={Colors.gray_300}
             onPress={() =>
-              navigation.navigate("DestinationDetails", { screen: "Home" })
+              navigation.navigate("DestinationDetails", { data : item , flag : getFlag(getCountryInfos(item.countryName)) })
             }
-            activeOpacity={0.7}
             style={styles.card}
           >
+            <>
             <View style={styles.cardImgContainer}>
               <Image style={styles.img} source={{ uri: item.imgSrc }} />
             </View>
@@ -99,7 +103,8 @@ const CardsScroller = () => {
                 {item.countryName}
               </Text>
             </View>
-          </TouchableOpacity>
+            </>
+          </TouchableHighlight>
         )}
       />
     </View>
@@ -141,6 +146,7 @@ const styles = StyleSheet.create({
   },
   card: {
     width: 260,
+    borderRadius: 15,
     marginHorizontal: GlobalStyles.paddingScreen,
   },
   cardImgContainer: {
