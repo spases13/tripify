@@ -6,10 +6,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import GlobalStyles from "../../global_styles/GlobalStyles";
-import Colors from "../../colors/Colors";
 import Fonts from "../../fonts/Fonts";
 import CustomHeaderNavigation from "../../library/CustomHeaderNavigation";
 import ProgressionBar from "../../library/ProgressionBar";
@@ -19,12 +18,14 @@ import Footer from "../../library/Footer";
 import { Icon } from "react-native-elements";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
+import { ThemeContext } from "../../theme/ThemeContext";
 
 export default function PersonalTouchScreen() {
   const [avatarImage, setAvatarImage] = useState({
     src: require("../../assets/users/avatar.png"),
     type: "asset",
   });
+  const { theme , toggleTheme } : any = useContext(ThemeContext);
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -42,18 +43,65 @@ export default function PersonalTouchScreen() {
     }
   };
 
-  const navigation : any = useNavigation()
+const navigation : any = useNavigation();
+  
+const styles = StyleSheet.create({
+  safeAreaContainer: {
+    flex: 1,
+  },
+  container: {
+    padding: GlobalStyles.paddingScreen,
+  },
+  title: {
+    lineHeight: 40,
+    includeFontPadding: false,
+    fontSize: 26,
+    fontFamily: Fonts.urbanist_700,
+    marginBottom: 15,
+  },
+  description: {
+    includeFontPadding: false,
+    fontSize: 16,
+    lineHeight: 24,
+    fontFamily: Fonts.urbanist_500,
+  },
+  avatar_container: {
+    alignItems: "center",
+    marginTop: 30,
+  },
+  avatar: {
+    width: 120,
+    height: 120,
+  },
+  avatar_image: {
+    borderRadius: 500,
+    height: "100%",
+    width: "100%",
+    resizeMode: "contain",
+  },
+  edit_button: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    backgroundColor: theme.primary,
+    marginLeft: "auto",
+    padding: 8,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
 
   return (
     <>
-      <SafeAreaView style={styles.safeAreaContainer}>
+      <SafeAreaView style={[styles.safeAreaContainer, { backgroundColor: theme.white }]}>
         <CustomHeaderNavigation onlyTwo>
-          <ProgressionBar progressValue={3/3} />
+          <ProgressionBar progressValue={3 / 3} />
         </CustomHeaderNavigation>
         <ScrollView contentContainerStyle={[styles.container]}>
           <View>
-            <Text style={styles.title}>Add a personal touch 👤</Text>
-            <Text style={styles.description}>
+            <Text style={[styles.title, { color: theme.black }]}>Add a personal touch 👤</Text>
+            <Text style={[styles.description, { color: theme.gray_900 }]}>
               To enhance your travel journey, we'd love to know more about you.
             </Text>
           </View>
@@ -70,7 +118,7 @@ export default function PersonalTouchScreen() {
               <TouchableOpacity style={styles.edit_button} onPress={pickImage}>
                 <Icon
                   size={12}
-                  color={Colors.white}
+                  color={theme.white}
                   type="font-awesome-5"
                   name="pen"
                 />
@@ -101,62 +149,9 @@ export default function PersonalTouchScreen() {
           </ScrollView>
         </ScrollView>
         <Footer relative>
-          <CustomButton onPress = {()=> navigation.navigate("AllSetScreen")} title="Continue" />
+          <CustomButton onPress={() => navigation.navigate("AllSetScreen")} title="Continue" />
         </Footer>
       </SafeAreaView>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  safeAreaContainer: {
-    backgroundColor: Colors.white,
-    flex: 1,
-  },
-  container: {
-    padding: GlobalStyles.paddingScreen,
-  },
-  title: {
-    lineHeight: 40,
-    includeFontPadding: false,
-    fontSize: 26,
-    fontFamily: Fonts.urbanist_700,
-    color: Colors.black,
-    marginBottom: 15,
-  },
-  description: {
-    includeFontPadding: false,
-    fontSize: 16,
-    lineHeight: 24,
-    fontFamily: Fonts.urbanist_500,
-    color: Colors.gray_900,
-  },
-  avatar_container: {
-    alignItems: "center",
-    marginTop: 30,
-  },
-  avatar: {
-    width: 120,
-    height: 120,
-  },
-  avatar_image: {
-    borderRadius: 500,
-    height: "100%",
-    width: "100%",
-    resizeMode: "contain",
-  },
-  edit_button: {
-    position: "absolute",
-    bottom: 0,
-    right: 0,
-    backgroundColor: Colors.primary,
-    marginLeft: "auto",
-    padding: 8,
-    borderRadius: 5,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  pen_icon: {
-    color: Colors.white,
-  },
-});

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import {Button, View} from "react-native";
 import { OnboardingFooterStyles as styles } from "./styles/OnboardingFooterStyles";
 import Colors from "../../../colors/Colors";
 import CustomButton from "../../../library/CustomButton";
+import { ThemeContext } from "../../../theme/ThemeContext";
 
 const OnboardingFooter: any = (props : any) => {
   const { slides, currentSlideIndex } = props;
@@ -11,19 +12,21 @@ const OnboardingFooter: any = (props : any) => {
     return currentSlideIndex === index;
   };
 
+  const { theme, toggleTheme } : any= useContext(ThemeContext);
+
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container , {backgroundColor : theme.white}]}>
       <View style={styles.indicatorsContainer}>
         {slides.map((_: any, index: number) => (
           <View
             key={index}
             style={[
               styles.indicator,
-              { backgroundColor: Colors.gray_500 },
+              { backgroundColor: theme.gray_500 },
               isCurrentSlide(index) && [
                 styles.selectedIndicator,
-                { backgroundColor: Colors.primary },
+                { backgroundColor: theme.primary },
               ],
             ]}
           />

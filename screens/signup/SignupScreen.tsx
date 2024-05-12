@@ -1,5 +1,5 @@
 import { Image, StatusBar, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "../../colors/Colors";
@@ -7,21 +7,24 @@ import CustomButton from "../../library/CustomButton";
 import Fonts from "../../fonts/Fonts";
 import GlobalStyles from "../../global_styles/GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
+import { ThemeContext } from "../../theme/ThemeContext";
 
 export default function SignupScreen() {
 
   const navigation : any  = useNavigation()
+  const { theme, toggleTheme } : any= useContext(ThemeContext);
+
 
   return (
-    <SafeAreaView style = {styles.container}>
-      <StatusBar backgroundColor={Colors.white} barStyle="dark-content" />
+    <SafeAreaView style = {[styles.container , {backgroundColor : theme.white}]}>
+      <StatusBar backgroundColor={theme.white} barStyle={theme.name === 'lightTheme' ? "dark-content" : "light-content"} />
       <ScrollView>
         <View style = {styles.logoContainer}>
             <Image style = {styles.logo} source = {require("../../assets/logo/logo_primary_name.png")} />
         </View>
         <View style = {styles.textContainer}>
-          <Text style = {styles.title}>Let's Get Started!</Text>
-          <Text style = {styles.subtitle}>Your Passport to Adventure Awaits</Text>
+          <Text style = {[styles.title , {color : theme.black}]}>Let's Get Started!</Text>
+          <Text style = {[styles.subtitle , {color : theme.gray_900}]}>Your Passport to Adventure Awaits</Text>
         </View>
         <View style = {styles.buttonsContainer}>
           <CustomButton title = "Continue with Google" variant = "social-media" ioniconsIconName = "logo-google" ioniconsIconColor = "#d50f25"/>
@@ -30,8 +33,8 @@ export default function SignupScreen() {
           <CustomButton onPress = {()=>{navigation.navigate("HumanVerification")}} title = "Continue As Guest" variant = "secondary"/>
         </View>
         <View style = {styles.privacyPolicyContainer}>
-          <Text style = {styles.privacyPolicyText}>Privacy Policy</Text>
-          <Text style = {styles.privacyPolicyText}>Terms Of Service</Text>
+          <Text style = {[styles.privacyPolicyText , {color : theme.gray_900}]}>Privacy Policy</Text>
+          <Text style = {[styles.privacyPolicyText , {color : theme.gray_900}]}>Terms Of Service</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -42,7 +45,6 @@ const styles = StyleSheet.create({
   container : {
     paddingHorizontal  : GlobalStyles.paddingScreen,
     flex : 1 , 
-    backgroundColor : Colors.white,
   },
 
   logoContainer : { 
@@ -58,7 +60,6 @@ const styles = StyleSheet.create({
     marginBottom : 50
   },
   title : {
-    color : Colors.black,
     fontSize : 28,
     textAlign : "center",
     fontFamily : Fonts.urbanist_800 ,
@@ -67,7 +68,6 @@ const styles = StyleSheet.create({
   subtitle : {
     fontSize : 14,
     textAlign : "center",
-    color : Colors.gray_900,
     fontFamily : Fonts.urbanist_500
   },
   buttonsContainer : {
@@ -85,6 +85,5 @@ const styles = StyleSheet.create({
   privacyPolicyText  : {
     fontFamily : Fonts.urbanist_500,
     fontSize : 12,
-    color : Colors.gray_900
   }
 });

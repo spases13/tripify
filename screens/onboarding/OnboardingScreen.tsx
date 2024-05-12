@@ -1,16 +1,18 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import {
   FlatList,
   StatusBar,
   Dimensions,
   NativeSyntheticEvent,
-  NativeScrollEvent
+  NativeScrollEvent,
+  Text
 } from 'react-native';
 
 import Colors from '../../colors/Colors';
 import OnboardingSlide from './components/OnboardingSlide';
 import OnboardingFooter from './components/OnboardingFooter';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { ThemeContext } from '../../theme/ThemeContext';
 const { width } = Dimensions.get('window');
 
 const OnboardingScreen = ({ navigation } : any) => {
@@ -54,9 +56,13 @@ const OnboardingScreen = ({ navigation } : any) => {
     }
   };
 
+  const { theme, toggleTheme } : any= useContext(ThemeContext);
+
+
   return (
-    <SafeAreaView style={{flex : 1 , backgroundColor : Colors.white}}>
-      <StatusBar backgroundColor={Colors.primary} barStyle={"light-content"} />
+    
+    <SafeAreaView style={{flex : 1 , backgroundColor : theme.white}}>
+      <StatusBar backgroundColor={theme.primary} barStyle={theme.name === 'lightTheme' ? "light-content" : "dark-content"} />
       <FlatList
         ref={ref}
         onMomentumScrollEnd={updateCurrentSlideIndex}

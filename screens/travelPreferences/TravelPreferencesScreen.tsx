@@ -6,10 +6,9 @@ import {
   Text,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import GlobalStyles from "../../global_styles/GlobalStyles";
-import Colors from "../../colors/Colors";
 import Fonts from "../../fonts/Fonts";
 import CustomHeaderNavigation from "../../library/CustomHeaderNavigation";
 import ProgressionBar from "../../library/ProgressionBar";
@@ -18,6 +17,7 @@ import CustomInput from "../../library/CustomInput";
 import TravelPreferenceCard from "../../library/TravelPreferenceCard";
 import Footer from "../../library/Footer";
 import { useNavigation } from "@react-navigation/native";
+import { ThemeContext } from "../../theme/ThemeContext";
 
 export default function TravelPreferencesScreen() {
   const [selectedTravelPreferences, setSelectedTravelPreferences] =
@@ -96,17 +96,19 @@ export default function TravelPreferencesScreen() {
   };
 
   const navigation : any = useNavigation()
+  const { theme, toggleTheme } : any= useContext(ThemeContext);
+
 
   return (
-    <SafeAreaView style={styles.safeAreaContainer}>
+    <SafeAreaView style={[styles.safeAreaContainer , {backgroundColor : theme.white}]}>
       <CustomHeaderNavigation onlyTwo>
         <ProgressionBar progressValue={2/3} />
       </CustomHeaderNavigation>
       <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={styles.container}>
           <View>
-            <Text style={styles.title}>Travel Preferences ✈️</Text>
-            <Text style={styles.description}>
+            <Text style={[styles.title , {color:theme.black}]}>Travel Preferences ✈️</Text>
+            <Text style={[styles.description , {color: theme.gray_900}]}>
               Tell us your travel preferences, and we'll tailor recommendations
               to your style. Don't worry. you can always change it later in the
               settings.
@@ -147,7 +149,6 @@ export default function TravelPreferencesScreen() {
 
 const styles = StyleSheet.create({
   safeAreaContainer: {
-    backgroundColor: Colors.white,
     flex: 1,
   },
   container: {
@@ -158,7 +159,6 @@ const styles = StyleSheet.create({
     includeFontPadding: false,
     fontSize: 26,
     fontFamily: Fonts.urbanist_700,
-    color: Colors.black,
     marginBottom: 15,
   },
   description: {
@@ -166,7 +166,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     fontFamily: Fonts.urbanist_500,
-    color: Colors.gray_900,
   },
   travelPreferencesList: {
     marginTop: 30,

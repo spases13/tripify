@@ -12,7 +12,8 @@ import TravelPreferencesScreen from "./screens/travelPreferences/TravelPreferenc
 import PersonalTouchScreen from "./screens/personalTouchScreen/PersonalTouchScreen";
 import AllSetScreen from "./screens/allSetScreen/AllSetScreen";
 import Colors from "./colors/Colors";
-
+import { ThemeContext, ThemeProvider } from "./theme/ThemeContext";
+import { useContext } from "react";
 
 export default function App() {
 
@@ -30,8 +31,7 @@ export default function App() {
     return <View></View>;
   } else {
     return (
-      <>
-      <StatusBar backgroundColor={Colors.white} barStyle='dark-content'/>
+      <ThemeProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Onboarding">
           <Stack.Screen options={{headerShown : false}} name="Main" component={MainScreen} />
@@ -44,14 +44,7 @@ export default function App() {
           <Stack.Screen options={{headerShown : false}} name="AllSetScreen" component={AllSetScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
-      </>
+      </ThemeProvider>
     );
   }
 }
-
-// import React from 'react';
-// import MainNavigator from './navigation/MainNavigator';
-
-// export default function App() {
-//   return <MainNavigator />;
-// }

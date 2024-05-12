@@ -5,7 +5,6 @@ export const OnboardingFooterStyles = StyleSheet.create({
   container: {
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    backgroundColor : Colors.white
   },
   indicatorsContainer: {
     flexDirection: 'row',

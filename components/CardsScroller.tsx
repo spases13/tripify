@@ -8,7 +8,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { Text } from "react-native-paper";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import GlobalStyles from "../global_styles/GlobalStyles";
 import { Link, useNavigation } from "@react-navigation/native";
 import Fonts from "../fonts/Fonts";
@@ -16,9 +16,12 @@ import Colors from "../colors/Colors";
 import Data from "../data/Data";
 import axios from "axios";
 import { MaterialIcons } from "@expo/vector-icons";
+import { ThemeContext } from "../theme/ThemeContext";
 
 const CardsScroller = () => {
   const navigation: any = useNavigation();
+
+  const { theme, toggleTheme } : any= useContext(ThemeContext);
 
   const apiCountries = "https://restcountries.com/v3.1/all";
 
@@ -42,6 +45,82 @@ const CardsScroller = () => {
         country?.name?.common.toLowerCase() === countryName.toLowerCase()
     );
   };
+
+  const styles = StyleSheet.create({
+    container: {
+      marginVertical: 25,
+    },
+    icon: {
+      fontSize: 12,
+      transform: [{ scale: 2 }],
+    },
+    header: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      flexWrap: "wrap",
+    },
+    header_text: {
+      color : theme.black,
+      fontFamily: Fonts.urbanist_700,
+    },
+    header_link: {
+      color: theme.primary,
+      fontFamily: Fonts.urbanist_700,
+      marginRight: 10,
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    header_link_text: {
+      color: theme.primary,
+    },
+    header_link_icon: {
+      color: theme.primary,
+      fontSize: 25,
+      marginHorizontal: 5,
+    },
+    card: {
+      width: 260,
+      borderRadius: 15,
+      marginHorizontal: GlobalStyles.paddingScreen,
+    },
+    cardImgContainer: {
+      height: 180,
+      marginBottom: 15,
+    },
+    card_first_text: {
+      marginBottom: 10,
+      color : theme.black,
+    },
+    card_first_text_title: {
+      fontFamily: Fonts.urbanist_600,
+      color : theme.black,
+    },
+    card_second_text: {
+      color : theme.black,
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 10,
+    },
+    card_second_text_title: {
+      fontFamily: Fonts.urbanist_500,
+      color: theme.gray_900,
+    },
+    img: {
+      borderRadius: 15,
+      width: "100%",
+      height: "100%",
+    },
+    flag: {
+      width: 28,
+      height: 19.5,
+      resizeMode: "stretch",
+      borderRadius: 3,
+      borderWidth: 1,
+      borderColor: theme.gray_500,
+    },
+  });
 
   return (
     <View style={styles.container}>
@@ -79,7 +158,7 @@ const CardsScroller = () => {
         renderItem={({ item }) => (
           <TouchableHighlight
             activeOpacity={0.6}
-            underlayColor={Colors.gray_300}
+            underlayColor={theme.gray_300}
             onPress={() =>
               navigation.navigate("DestinationDetails", { data : item , flag : getFlag(getCountryInfos(item.countryName)) })
             }
@@ -110,77 +189,5 @@ const CardsScroller = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginVertical: 25,
-  },
-  icon: {
-    fontSize: 12,
-    transform: [{ scale: 2 }],
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexWrap: "wrap",
-  },
-  header_text: {
-    fontFamily: Fonts.urbanist_700,
-  },
-  header_link: {
-    color: Colors.primary,
-    fontFamily: Fonts.urbanist_700,
-    marginRight: 10,
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  header_link_text: {
-    color: Colors.primary,
-  },
-  header_link_icon: {
-    color: Colors.primary,
-    fontSize: 25,
-    marginHorizontal: 5,
-  },
-  card: {
-    width: 260,
-    borderRadius: 15,
-    marginHorizontal: GlobalStyles.paddingScreen,
-  },
-  cardImgContainer: {
-    height: 180,
-    marginBottom: 15,
-  },
-  card_first_text: {
-    marginBottom: 10,
-  },
-  card_first_text_title: {
-    fontFamily: Fonts.urbanist_600,
-  },
-  card_second_text: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-  },
-  card_second_text_title: {
-    fontFamily: Fonts.urbanist_500,
-    color: Colors.gray_900,
-  },
-  img: {
-    borderRadius: 15,
-    width: "100%",
-    height: "100%",
-  },
-  flag: {
-    width: 28,
-    height: 19.5,
-    resizeMode: "stretch",
-    borderRadius: 3,
-    borderWidth: 1,
-    borderColor: Colors.gray_500,
-  },
-});
 
 export default CardsScroller;

@@ -1,5 +1,5 @@
 import { StatusBar } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import IconHomeSolid from '../assets/icons/solid/IconHomeSolid';
 import IconHomeOutlined from '../assets/icons/outlined/IconHomeOutlined';
@@ -15,14 +15,16 @@ import HomeScreen from './HomeScreen';
 import MyTripsScreen from './MyTripsScreen';
 import SavedScreen from './SavedScreen';
 import SettingsScreen from './SettingsScreen';
+import { ThemeContext } from '../theme/ThemeContext';
 
 
 const MainScreen = () => {
   const Tab = createBottomTabNavigator();
+  const { theme, toggleTheme } : any= useContext(ThemeContext);
 
   return (
     <>
-    <StatusBar backgroundColor={Colors.white} barStyle='dark-content'/>
+    <StatusBar backgroundColor={theme.white} barStyle={theme.name === "darkTheme" ? 'light-content' : "dark-content"}/>
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown : false,
@@ -46,9 +48,9 @@ const MainScreen = () => {
           fontSize: 12,
           fontFamily : Fonts.urbanist_700
         },
-        tabBarStyle : {height  : 65 , paddingTop  : 10, paddingBottom : 10 , elevation : 0 , backgroundColor : Colors.white , borderColor  : Colors.white},
-        tabBarActiveTintColor: Colors.primary,
-        tabBarInactiveTintColor: Colors.gray,
+        tabBarStyle : {height  : 65 , paddingTop  : 10, paddingBottom : 10 , elevation : 0 , backgroundColor : theme.white , borderColor  : theme.white},
+        tabBarActiveTintColor: theme.primary,
+        tabBarInactiveTintColor: theme.gray,
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />

@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import Colors from '../colors/Colors'
+import { ThemeContext } from '../theme/ThemeContext'
 
 export default function ProgressionBar(props : any) {
 
@@ -10,8 +11,11 @@ export default function ProgressionBar(props : any) {
     return `${(progress*100).toString()}%`
   }
 
+  const { theme, toggleTheme } : any= useContext(ThemeContext);
+
+
   return (
-    <View style = {[styles.progressBarContainer]}>
+    <View style = {[styles.progressBarContainer , {backgroundColor : theme.gray_300}]}>
       <View style = {[styles.progressBar , {width : convertDoubleToPercentage(progress)}]}></View>
     </View>
   )
@@ -23,7 +27,6 @@ const styles = StyleSheet.create({
     height : 10,
     borderRadius : 10,
     overflow : "hidden",
-    backgroundColor : Colors.gray_300
   },
   progressBar : {
     height : "100%" , 

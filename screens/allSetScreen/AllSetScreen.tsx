@@ -5,14 +5,14 @@ import {
   Text,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import GlobalStyles from "../../global_styles/GlobalStyles";
-import Colors from "../../colors/Colors";
 import Fonts from "../../fonts/Fonts";
 import CustomButton from "../../library/CustomButton";
 import Footer from "../../library/Footer";
 import { useNavigation } from "@react-navigation/native";
+import { ThemeContext } from "../../theme/ThemeContext";
 
 export default function AllSetScreen() {
   const [avatarImage, setAvatarImage] = useState({
@@ -22,8 +22,54 @@ export default function AllSetScreen() {
 
   const navigation : any = useNavigation()
 
+  const { theme, toggleTheme } : any = useContext(ThemeContext);
+
+  const styles = StyleSheet.create({
+    safeAreaContainer: {
+      backgroundColor: theme.white,
+      flex: 1,
+    },
+    container: {
+      flex: 1,
+      justifyContent : "center" , 
+      alignItems : "center" , 
+      alignContent : "center",
+      padding: GlobalStyles.paddingScreen,
+    },
+    title: {
+      textAlign : "center",
+      lineHeight: 40,
+      includeFontPadding: false,
+      fontSize: 26,
+      fontFamily: Fonts.urbanist_700,
+      color: theme.black,
+      marginVertical: 25,
+    },
+    description: {
+      textAlign : "center",
+      includeFontPadding: false,
+      fontSize: 16,
+      lineHeight: 24,
+      fontFamily: Fonts.urbanist_500,
+      color: theme.gray_900,
+    },
+    avatar_container: {
+      alignItems: "center",
+      marginTop: 30,
+    },
+    avatar: {
+      width: 125,
+      height: 125,
+    },
+    avatar_image: {
+      borderRadius: 500,
+      height: "100%",
+      width: "100%",
+      resizeMode: "contain",
+    },
+  });
+  
   return (
-    <>
       <SafeAreaView style={styles.safeAreaContainer}>
         <ScrollView contentContainerStyle={[styles.container]}>
           <View style={styles.avatar_container}>
@@ -48,51 +94,5 @@ export default function AllSetScreen() {
           <CustomButton onPress = {()=>navigation.navigate("Main")} title="Explore Destinations" />
         </Footer>
       </SafeAreaView>
-    </>
   );
 }
-
-const styles = StyleSheet.create({
-  safeAreaContainer: {
-    backgroundColor: Colors.white,
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-    justifyContent : "center" , 
-    alignItems : "center" , 
-    alignContent : "center",
-    padding: GlobalStyles.paddingScreen,
-  },
-  title: {
-    textAlign : "center",
-    lineHeight: 40,
-    includeFontPadding: false,
-    fontSize: 26,
-    fontFamily: Fonts.urbanist_700,
-    color: Colors.black,
-    marginVertical: 25,
-  },
-  description: {
-    textAlign : "center",
-    includeFontPadding: false,
-    fontSize: 16,
-    lineHeight: 24,
-    fontFamily: Fonts.urbanist_500,
-    color: Colors.gray_900,
-  },
-  avatar_container: {
-    alignItems: "center",
-    marginTop: 30,
-  },
-  avatar: {
-    width: 125,
-    height: 125,
-  },
-  avatar_image: {
-    borderRadius: 500,
-    height: "100%",
-    width: "100%",
-    resizeMode: "contain",
-  },
-});

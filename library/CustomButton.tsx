@@ -1,12 +1,17 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "react-native-elements";
 import Colors from "../colors/Colors";
 import Fonts from "../fonts/Fonts";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { ThemeContext } from "../theme/ThemeContext";
 
 export default function CustomButton({ ...props }) {
+
+
+  const { theme, toggleTheme } : any= useContext(ThemeContext);
+
   const variant = props.variant;
 
   let colors: any;
@@ -14,17 +19,17 @@ export default function CustomButton({ ...props }) {
   let buttonStyle : any;
 
   if (variant === "secondary") {
-    colors = [Colors.gray_300, Colors.gray_300];
+    colors = [theme.gray_300, theme.gray_300];
     titleStyle = styles.titleStyleV2;
     buttonStyle = styles.buttonStyleV2;
   } else if (variant === "social-media") {
-    colors = [Colors.white, Colors.white];
-    titleStyle = styles.titleStyleSocialMedia;
-    buttonStyle = styles.buttonStyleSocialMedia;
+    colors = [theme.white, theme.white];
+    titleStyle = [styles.titleStyleSocialMedia  , {color : theme.black}];
+    buttonStyle = [styles.buttonStyleSocialMedia ,     {borderColor : theme.gray_300}]    ;
   } else {
-    titleStyle = styles.titleStyle;
+    titleStyle = [styles.titleStyle , {color : theme.white}];
     buttonStyle = styles.buttonStyle;
-    colors = [Colors.primary, Colors.primary_alt];
+    colors = [theme.primary, theme.primary_alt];
   }
 
   return (
@@ -65,7 +70,7 @@ const styles = StyleSheet.create({
     minWidth: 100,
     overflow: "hidden",
     borderWidth : 2,
-    borderColor : Colors.gray_300
+    // borderColor : Colors.gray_300
   },
   buttonStyleContainer: {
     borderRadius: 100,

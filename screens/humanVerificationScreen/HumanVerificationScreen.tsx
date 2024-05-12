@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import GlobalStyles from "../../global_styles/GlobalStyles";
 import Colors from "../../colors/Colors";
@@ -9,20 +9,23 @@ import ProgressionBar from "../../library/ProgressionBar";
 import CustomButton from "../../library/CustomButton";
 import { useNavigation } from "@react-navigation/native";
 import Footer from "../../library/Footer";
+import { ThemeContext } from "../../theme/ThemeContext";
 
 export default function HumanVerificationScreen() {
   
   const navigation :any = useNavigation()
+  const { theme, toggleTheme } : any= useContext(ThemeContext);
+
 
   return (
-    <SafeAreaView style = {styles.safeAreaContainer}>
+    <SafeAreaView style = {[styles.safeAreaContainer , {backgroundColor : theme.white}]}>
       <CustomHeaderNavigation onlyTwo>
         <ProgressionBar progressValue={1/3}/>
       </CustomHeaderNavigation>
       <View style={styles.container}>
         <View>
-          <Text style={styles.title}>Verifiy you're human 🤖</Text>
-          <Text style={styles.description}>
+          <Text style={[styles.title , {color : theme.black}]}>Verifiy you're human 🤖</Text>
+          <Text style={[styles.description , {color : theme.gray_900}]}>
             Please solve this captcha so we know you are a person.
           </Text>
         </View>
@@ -39,7 +42,6 @@ export default function HumanVerificationScreen() {
 
 const styles = StyleSheet.create({
   safeAreaContainer : { 
-    backgroundColor : Colors.white,
     flex : 1
   },
   container: {
@@ -50,7 +52,6 @@ const styles = StyleSheet.create({
     includeFontPadding  : false,
     fontSize: 24,
     fontFamily: Fonts.urbanist_700,
-    color: Colors.black,
     marginBottom: 15,
   },
   description: {
@@ -58,6 +59,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 22,
     fontFamily: Fonts.urbanist_500,
-    color: Colors.gray_900,
   },
 });
