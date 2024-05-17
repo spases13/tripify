@@ -1,18 +1,24 @@
-import React, { useContext, useRef } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import React, { useContext, useRef, useState } from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
 import Fonts from '../fonts/Fonts';
 import { ThemeContext } from '../theme/ThemeContext';
+import { Icon } from 'react-native-elements';
 
 interface CustomInputProps {
   icon?: any;
   keyboardType?: any;
   placeholder?: string;
   onChangeText?: (text: string) => void;
+  value : string,
   label?: string;
+  autoFocus ?:  boolean
+  autoComplete ?:  any,
+  returnKeyType ?: any ,
+  onSubmitEditing ?: any
 }
 
-export default function CustomInput({ icon, keyboardType, placeholder, onChangeText, label }: CustomInputProps) {
+export default function CustomInput(props: CustomInputProps) {
   const inputRef = useRef<TextInput>(null);
   const { theme , toggleTheme } : any = useContext(ThemeContext);
 
@@ -54,23 +60,37 @@ export default function CustomInput({ icon, keyboardType, placeholder, onChangeT
     },
   });
 
+  const clearInput = () => {
+    props.onChangeText("")
+  }
+
   return (
     <View>
-      {label && label.length > 0 && <Text style={styles.labelText}>{label}</Text>}
+      {props.label && props.label.length > 0 && <Text style={styles.labelText}>{props.label}</Text>}
       <View style={{ width: "100%", flexDirection: 'row', justifyContent: "center" }}>
         <View style={styles.searchInputContainer}>
-          {icon ? <Ionicons onPress={handleIconPress} style={styles.icon} name={icon} /> : <View style={{ marginLeft: 20 }} />}
+          {props.icon ? <Ionicons onPress={handleIconPress} style={styles.icon} name={props.icon} /> : <View style={{ marginLeft: 20 }} />}
           <TextInput
             ref={inputRef}
-            onChangeText={onChangeText}
-            keyboardType={keyboardType ?? 'default'}
-            placeholder={placeholder}
+            onChangeText={(text)=> props.onChangeText(text)}
+            value={props.value}
+            autoComplete={props.autoComplete}
+            placeholder={props.placeholder}
+            onSubmitEditing={props.onSubmitEditing}
+            autoFocus = {props.autoFocus}
+            returnKeyType={props.returnKeyType}
+            keyboardType={props.keyboardType ?? 'default'}
             selectionColor={theme.black}
-            cursorColor={theme.black}
+            cursorColor={theme.primary}
             placeholderTextColor={theme.gray}
             underlineColorAndroid={theme.gray_300}
             style={styles.searchInput}
           />
+         {
+          props.value && props.value?.length > 0 && <TouchableOpacity onPress={() => clearInput()} style = {{height : "100%" , alignItems : "center" , justifyContent : "center" , aspectRatio : 1 , backgroundColor : "transparent" , zIndex : 1 , position : "absolute" , right : 0}}>
+            <Icon color={theme.gray_700} type='ionicons' name='close' />
+          </TouchableOpacity>
+         }
         </View>
       </View>
     </View>

@@ -14,6 +14,7 @@ import AllSetScreen from "./screens/allSetScreen/AllSetScreen";
 import Colors from "./colors/Colors";
 import { ThemeContext, ThemeProvider } from "./theme/ThemeContext";
 import { useContext } from "react";
+import AllDestinations from "./screens/allDestinations/AllDestinations";
 
 export default function App() {
 
@@ -42,6 +43,7 @@ export default function App() {
           <Stack.Screen options={{headerShown : false}} name="TravelPreferencesScreen" component={TravelPreferencesScreen}/>
           <Stack.Screen options={{headerShown : false}} name="PersonalTouchScreen" component={PersonalTouchScreen}/>
           <Stack.Screen options={{headerShown : false}} name="AllSetScreen" component={AllSetScreen}/>
+          <Stack.Screen options={{headerShown : false}} name="AllDestinations" component={AllDestinations}/>
         </Stack.Navigator>
       </NavigationContainer>
       </ThemeProvider>

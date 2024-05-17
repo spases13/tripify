@@ -116,6 +116,7 @@ export default function TravelPreferencesScreen() {
           </View>
           <View style={{ marginTop: 30 }}>
             <CustomInput
+              value={searchInputValue}
               onChangeText={setSearchInputValue}
               icon="search-outline"
               placeholder="Search travel preferences"

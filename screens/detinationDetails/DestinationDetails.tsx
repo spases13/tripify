@@ -1,11 +1,20 @@
-import { Dimensions, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, { useContext } from 'react'
-import { StatusBar } from 'react-native'
-import IconButton from '../../library/IconButton'
-import GlobalStyles from '../../global_styles/GlobalStyles'
-import Fonts from '../../fonts/Fonts'
-import { useNavigation } from '@react-navigation/native'
-import { ThemeContext } from '../../theme/ThemeContext'
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import React, { useContext } from "react";
+import { StatusBar } from "react-native";
+import IconButton from "../../library/IconButton";
+import GlobalStyles from "../../global_styles/GlobalStyles";
+import Fonts from "../../fonts/Fonts";
+import { useNavigation } from "@react-navigation/native";
+import { ThemeContext } from "../../theme/ThemeContext";
+import Data from "../../data/Data";
 
 export default function DestinationDetails({ route }: any) {
   const { data, flag } = route.params;
@@ -14,9 +23,9 @@ export default function DestinationDetails({ route }: any) {
   const { theme }: any = useContext(ThemeContext);
 
   const styles = StyleSheet.create({
-    container : {
+    container: {
       flex: 1,
-      backgroundColor: theme.white
+      backgroundColor: theme.white,
     },
     imageContainer: {
       height: Dimensions.get("screen").height * 0.5,
@@ -27,7 +36,7 @@ export default function DestinationDetails({ route }: any) {
       top: 50,
       zIndex: 1,
       paddingHorizontal: 20,
-      gap : 10,
+      gap: 10,
       flexDirection: "row",
       justifyContent: "space-between",
       width: "100%",
@@ -63,7 +72,7 @@ export default function DestinationDetails({ route }: any) {
       resizeMode: "stretch",
       borderRadius: 3,
       borderWidth: 1,
-      borderColor : theme.gray
+      borderColor: theme.gray,
     },
     countryName: {
       fontFamily: Fonts.urbanist_500,
@@ -80,12 +89,35 @@ export default function DestinationDetails({ route }: any) {
 
   return (
     <ScrollView style={styles.container}>
-      <StatusBar barStyle={theme.name === "lightTheme" ?  'light-content' : "dark-content"} backgroundColor={"transparent"} translucent />
+      <StatusBar
+        barStyle={
+          theme.name === "lightTheme" ? "light-content" : "dark-content"
+        }
+        backgroundColor={"transparent"}
+        translucent
+      />
       <View style={styles.imageContainer}>
         <View style={styles.iconContainer}>
-          <IconButton onPress={() => navigation.goBack()} color={theme.black} size={24} type="octicon" name="arrow-left" />
-          <IconButton style={styles.bookmarkIcon} color={theme.black} size={24} type="octicon" name="bookmark" />
-          <IconButton color={theme.black} size={20} type="octicon" name="share-android" />
+          <IconButton
+            onPress={() => navigation.goBack()}
+            color={theme.black}
+            size={24}
+            type="octicon"
+            name="arrow-left"
+          />
+          <IconButton
+            style={styles.bookmarkIcon}
+            color={theme.black}
+            size={24}
+            type="octicon"
+            name="bookmark"
+          />
+          <IconButton
+            color={theme.black}
+            size={20}
+            type="octicon"
+            name="share-android"
+          />
         </View>
         <Image source={{ uri: data.imgSrc }} style={styles.image} />
       </View>
@@ -97,6 +129,23 @@ export default function DestinationDetails({ route }: any) {
         </View>
         <Text style={styles.description}>{data.description}</Text>
       </View>
+      <View style ={{marginTop : 10}}>
+        <Text style = {[GlobalStyles.container , {marginBottom : 20 ,color : theme.black , fontFamily : Fonts.urbanist_700 , fontSize : 18}]}>Gallery</Text>
+        {data && (
+          <FlatList
+            horizontal
+            contentContainerStyle={{ paddingBottom: 20 }}
+            renderItem={({ item }) => (
+              <View style={{overflow : "hidden",  marginHorizontal: GlobalStyles.paddingScreen, borderRadius  : 10 , backgroundColor: theme.gray_300 , height : 100 , width : 100 }}>
+                <Image style = {{height : "100%" ,width : "100%"}} source={{ uri: item }} />
+              </View>
+            )}
+            keyExtractor={(item) => item.toString()}
+            ItemSeparatorComponent={() => <View style={{ marginLeft: -25 }} />}
+            data={data.pictures}
+          />
+         )} 
+      </View>
     </ScrollView>
-  )
+  );
 }

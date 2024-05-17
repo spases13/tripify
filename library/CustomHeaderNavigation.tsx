@@ -13,9 +13,7 @@ export default function CustomHeaderNavigation(props: any) {
   return (
       <View style={styles.container}>
         <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}
+          onPress={props.onPressBackArrow ?? (() => navigation.goBack())}
           style={styles.backArrowButton}
         >
           <Icon color={theme.black} size={28} type="octicon" name="arrow-left" />

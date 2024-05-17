@@ -127,13 +127,13 @@ const CardsScroller = () => {
       <View
         style={[
           styles.header,
-          { paddingHorizontal: GlobalStyles.paddingScreen },
+          { paddingHorizontal: GlobalStyles.paddingScreen }
         ]}
       >
         <Text variant="titleMedium" style={styles.header_text}>
           Popular Destinations
         </Text>
-        <Link to={"/"}>
+        <Link to={"/AllDestinations"}>
           <View style={styles.header_link}>
             <Text style={styles.header_link_text}>View All</Text>
             <MaterialIcons

@@ -10,7 +10,6 @@ const Header = () => {
 
   const { theme, toggleTheme } = useContext(ThemeContext);
 
-
   const styles = StyleSheet.create({
     header: {
       display: "flex",
